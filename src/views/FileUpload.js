@@ -36,7 +36,7 @@ const FileUpload = () => {
   };
 
   return (
-    <div>
+    <div style={{marginLeft:'20px'}}>
       <h2>Upload Products from File</h2>
       <input type="file" accept=".json" onChange={handleFileChange} />
       <button type="button" onClick={handleFileUpload}>

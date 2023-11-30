@@ -7,6 +7,7 @@ const Register = () => {
     email: '',
     password: '',
   });
+  const [success, setSuccess ] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +22,9 @@ const Register = () => {
 
     try {
       const response = await axios.post('http://localhost:8080/register', userData);
+      setSuccess(true);
       console.log('Registration successful!', response.data);
+
       // Optionally, you can redirect the user to another page upon successful registration
     } catch (error) {
       console.error('Registration failed', error);
@@ -29,7 +32,7 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div style={{marginLeft:'20px'}}>
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
         <div>
@@ -48,6 +51,9 @@ const Register = () => {
           <button type="submit">Register</button>
         </div>
       </form>
+      {
+        success && <h6>Registered</h6>
+      }
     </div>
   );
 };

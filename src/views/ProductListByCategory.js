@@ -13,22 +13,23 @@ const ProductListByCategory = () => {
   return (
     <div>
 
-<div>
+<div style={{marginLeft:'20px'}}>
       <h2>Product List by Category</h2>
       
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <label>
           Enter Category ID:
           <input type="text" value={categoryId} onChange={(e) => setCategoryId(e.target.value)} />
         </label>
         <button type="submit">Fetch Products</button>
-      </form>
+      </form> */}
+      <ProductList />
 
-      {submittedCategoryId && <ProductList categoryId={submittedCategoryId} />}
+      {/* {submittedCategoryId && <ProductList categoryId={submittedCategoryId} />} */}
     </div>
 
       {/* <h2>Product List by Category</h2> */}
-      <ProductList categoryId={categoryId} />
+      {/* <ProductList categoryId={categoryId} /> */}
     </div>
   );
 };

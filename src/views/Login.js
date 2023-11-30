@@ -7,6 +7,8 @@ const Login = () => {
     password: '',
   });
 
+  const [success, setSuccess ] = useState(false);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setLoginData({
@@ -21,6 +23,7 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:8080/login', loginData);
       console.log('Login successful!', response.data);
+      setSuccess(true);
       // Optionally, you can redirect the user to another page upon successful login
     } catch (error) {
       console.error('Login failed', error);
@@ -28,7 +31,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div style={{marginLeft:'20px'}}>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
@@ -43,6 +46,9 @@ const Login = () => {
           <button type="submit">Login</button>
         </div>
       </form>
+      {
+        success && <h6>Logged In</h6>
+      }
     </div>
   );
 };

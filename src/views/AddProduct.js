@@ -2,12 +2,19 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const AddProduct = () => {
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [formData, setFormData] = useState({
     userId: '',
     productName: '',
     description: '',
     categoryIds: [],
   });
+
+  const categoriesMap = new Map([
+    [1, '1'],
+    [2, '2'],
+    [3, '3'],
+  ]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,7 +49,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div>
+    <div style={{marginLeft:'20px'}}>
       <h2>Add Product</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -60,31 +67,17 @@ const AddProduct = () => {
           <input type="text" name="description" value={formData.description} onChange={handleChange} required />
         </label>
         <br />
-        <label>
-          Categories (select multiple):
-          <select multiple name="categoryIds" value={formData.categoryIds} onChange={handleCategoryChange}
-          style={{ width: '20%', padding: '8px', borderRadius: '4px' }}
-          >
-            {/* Assume you have a list of categories available */}
-            <option value="">--Select--</option>
-            <option value="1">Electronics</option>
-            <option value="2">Food</option>
-            <option value="3">AutoZone</option>
-            {/* Add more options as needed */}
-          </select>
-          {/* {formData.categoryIds.length > 0 && (
-        <div>
-          <h6>Selected Category IDs:</h6>
-          <ul>
-            {formData.categoryIds.map((categoryId) => (
-              <li key={categoryId}>{categoryId}</li>
-            ))}
-          </ul>
-        </div>
-      )} */}
-        </label>
+        <label>Select Category:</label>
+      <select value={selectedCategory} onChange={handleCategoryChange}>
+        <option value="">Select...</option>
+        {[...categoriesMap].map(([categoryId, categoryName]) => (
+          <option key={categoryId} value={categoryId}>
+            {categoryName}
+          </option>
+        ))}
+      </select>
         <br />
-        
+
         <button type="submit">Add Product</button>
       </form>
 
